@@ -1,0 +1,207 @@
+/* ------------------------------------------------------------------
+   Colours and fonts live here as variables: change one line to
+   re-theme the whole page. The dark block follows the visitor's
+   system setting automatically; no toggle, no JavaScript.
+   ------------------------------------------------------------------ */
+:root {
+  --bg: #fcfbf8;
+  --text: #1d1d1b;
+  --muted: #5e5c57;
+  --accent: #1d4f7a;        /* deep harbour blue */
+  --accent-hover: #2f6a9c;
+  --rule: #e4e0d8;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17191c;
+    --text: #e7e4de;
+    --muted: #a19d95;
+    --accent: #8fb9e0;
+    --accent-hover: #b3d1ec;
+    --rule: #33363b;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.6;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---------- Layout: fixed-width sidebar + flexible main column ---------- */
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 64px 32px 48px;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 72px;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: sticky;       /* stays in view while the main column scrolls */
+  top: 64px;
+  align-self: start;
+  font-family: var(--sans);
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  max-width: 180px;       /* source is 648px, so sharp on Retina up to ~320px */
+  aspect-ratio: 1 / 1;
+  object-fit: cover;      /* crops rather than squashes a non-square photo */
+  border-radius: 6px;
+  margin-bottom: 24px;
+}
+
+.sidebar h1 {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.sidebar p { margin: 0; }
+.role { font-size: 1rem; }
+.inst { font-size: 1rem; color: var(--muted); }
+
+.market {
+  margin-top: 16px !important;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 24px; }
+
+.btn {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+.btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+
+.contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.contact li + li { margin-top: 10px; }
+
+/* ---------- Main column ---------- */
+main { min-width: 0; }     /* lets long words wrap instead of widening the grid */
+
+section + section { margin-top: 48px; }
+
+.lead { margin-top: 0; }
+
+h2 {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.paper + .paper { margin-top: 28px; }
+
+.paper h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 4px;
+}
+.paper h3 a { color: var(--text); }
+.paper h3 a:hover { color: var(--accent); }
+
+.meta { color: var(--muted); font-size: 0.95rem; margin: 0 0 4px; }
+
+/* Native <details>/<summary>: collapsible abstracts with no JavaScript. */
+details { margin-top: 6px; }
+summary {
+  cursor: pointer;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  list-style: none;
+  width: fit-content;
+}
+summary::-webkit-details-marker { display: none; }
+summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 6px;
+  transition: transform 0.15s ease;
+}
+details[open] > summary::before { transform: rotate(90deg); }
+details p { margin: 8px 0 0; color: var(--text); }
+
+ul.plain { list-style: none; padding: 0; margin: 0; }
+ul.plain li + li { margin-top: 8px; }
+ul.teaching li + li { margin-top: 14px; }
+.teaching .meta { display: block; margin: 0; }   /* convenor + years on their own line */
+.awards { margin: 18px 0 0; }
+
+footer {
+  margin-top: 64px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ---------- TODO markers: impossible to miss, delete before publishing ---------- */
+.todo {
+  background: #fff3a3;
+  color: #5a4a00;
+  outline: 1px dashed #c9a800;
+  padding: 0 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Narrow screens: stack sidebar above content ---------- */
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+  .page {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 32px 16px 32px;
+  }
+  .sidebar { position: static; }
+  .photo { max-width: 140px; }
+}
